@@ -137,8 +137,8 @@ export const OrderService = {
 
   async create(payload: {
     products: { product_id: number; order_quantity: number; unit_price: number; subtotal: number }[];
-    shipping_address: Address['address'];
-    billing_address: Address['address'];
+    shipping_address: Record<string, string>;
+    billing_address: Record<string, string>;
     customer_contact: string;
     payment_gateway: string;
     amount: number;
@@ -148,6 +148,7 @@ export const OrderService = {
     paid_total: number;
     total: number;
     language: string;
+    note?: string;
   }): Promise<Order> {
     const { data } = await client.post<Order>(ENDPOINTS.orders, payload);
     return data;
